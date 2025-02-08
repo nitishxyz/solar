@@ -19,7 +19,7 @@ console.log();
 program
   .name("solar")
   .description("A CLI tool for Solana developers")
-  .version("0.1.0")
+  .version("0.1.3")
   .option("-i, --interactive", "Run in interactive mode");
 
 // Register commands
