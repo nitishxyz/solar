@@ -1,0 +1,62 @@
+{
+  "name": "@nitishxyz/solar",
+  "version": "0.1.2",
+  "description": "A powerful CLI tool for Solana developers that simplifies common development tasks",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "solar": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "NODE_OPTIONS='--no-node-snapshot' bun build ./cli.ts --outdir ./dist --target node",
+    "prepublishOnly": "NODE_OPTIONS='--no-node-snapshot' bun run build",
+    "dev": "bun run cli.ts",
+    "start": "bun run cli.ts"
+  },
+  "keywords": [
+    "solana",
+    "cli",
+    "blockchain",
+    "crypto",
+    "web3",
+    "development-tools",
+    "solana-cli",
+    "solana-tools",
+    "blockchain-tools"
+  ],
+  "author": {
+    "name": "nitishxyz",
+    "url": "https://github.com/nitishxyz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitishxyz/solar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nitishxyz/solar/issues"
+  },
+  "homepage": "https://github.com/nitishxyz/solar#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.1.42"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.0",
+    "@types/inquirer": "^9.0.7",
+    "bs58": "^6.0.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "inquirer": "^12.4.1",
+    "ora": "^8.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
