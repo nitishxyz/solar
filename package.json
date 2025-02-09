@@ -1,6 +1,6 @@
 {
   "name": "@nitishxyz/solar",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A powerful CLI tool for Solana developers that simplifies common development tasks",
   "module": "index.ts",
   "type": "module",
