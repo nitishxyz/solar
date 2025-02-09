@@ -9,6 +9,7 @@ import { syncInteractive } from "./sync";
 import { txInteractive } from "./tx";
 import { doctorInteractive } from "./doctor";
 import { setupInteractive } from "./setup";
+import { walletInteractive } from "./wallet";
 
 export async function interactiveMode(connection: Connection) {
   while (true) {
@@ -18,6 +19,7 @@ export async function interactiveMode(connection: Connection) {
         type: "list",
         name: "action",
         message: "What would you like to do?\n",
+        pageSize: 15,
         choices: [
           { name: chalk.blue("Configure Settings"), value: "Configure" },
           {
@@ -28,6 +30,7 @@ export async function interactiveMode(connection: Connection) {
             name: chalk.yellow("View Keypair Info"),
             value: "View Keypair Info",
           },
+          { name: chalk.cyan("View Wallet Info"), value: "View Wallet Info" },
           {
             name: chalk.magenta("View Transaction Details"),
             value: "View Transaction Details",
@@ -75,6 +78,9 @@ export async function interactiveMode(connection: Connection) {
         break;
       case "Doctor":
         await doctorInteractive();
+        break;
+      case "View Wallet Info":
+        await walletInteractive();
         break;
     }
 

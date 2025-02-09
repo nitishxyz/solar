@@ -14,6 +14,7 @@ export async function configInteractive() {
       type: "list",
       name: "configAction",
       message: "What would you like to configure?\n",
+      pageSize: 15,
       choices: [
         { name: "Show Current Configuration", value: "show-current" },
         { name: "Show Global Configuration", value: "show-global" },

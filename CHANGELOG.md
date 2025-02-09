@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.9] - 2025-02-09
+
+### Added
+
+- New wallet command functionality
+  - Added `wallet` command for viewing wallet information
+  - Integrated wallet viewing capabilities in interactive mode
+- UI/UX Improvements
+  - Increased page size to 15 items in interactive menus
+  - Enhanced menu readability in configuration and main menu
+
 ## [0.1.8] - 2025-02-09
 
 ### Added
