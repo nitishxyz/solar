@@ -25,7 +25,7 @@ A powerful command-line interface tool for Solana developers that simplifies com
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/solar.git
+git clone https://github.com/nitishxyz/solar.git
 cd solar
 ```
 
