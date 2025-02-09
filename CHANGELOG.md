@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.14] - 2025-02-09
+
+### Changed
+
+- Fixed setup command functionality (which was broken due to you know AI)
+  - Added automatic dependency installation for Solana CLI
+  - Simplified interactive setup process
+  - Improved error handling with manual installation instructions
+
 ## [0.1.13] - 2025-02-09
 
 ### Fixed
