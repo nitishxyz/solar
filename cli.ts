@@ -16,6 +16,7 @@ import { setupCommand } from "./src/commands/setup";
 import { doctorCommand } from "./src/commands/doctor";
 import { txCommand } from "./src/commands/tx";
 import { walletCommand } from "./src/commands/wallet";
+import { upgradeCommand } from "./src/commands/upgrade";
 // Add initial spacing
 console.log();
 
@@ -36,6 +37,7 @@ setupCommand(program);
 doctorCommand(program);
 txCommand(program);
 walletCommand(program);
+upgradeCommand(program);
 
 // Parse or run interactive mode
 const options = program.opts();
