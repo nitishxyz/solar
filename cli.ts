@@ -11,6 +11,7 @@ import { airdropCommand } from "./src/commands/airdrop";
 import { syncCommand } from "./src/commands/sync";
 import { interactiveMode } from "./src/interactive";
 import { getConnection } from "./src/utils/connection";
+import { version } from "./package.json";
 
 // Add initial spacing
 console.log();
@@ -19,7 +20,7 @@ console.log();
 program
   .name("solar")
   .description("A CLI tool for Solana developers")
-  .version("0.1.3")
+  .version(version)
   .option("-i, --interactive", "Run in interactive mode");
 
 // Register commands

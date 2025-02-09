@@ -13,6 +13,9 @@
   "scripts": {
     "build": "NODE_OPTIONS='--no-node-snapshot' bun build ./cli.ts --outdir ./dist --target node",
     "prepublishOnly": "NODE_OPTIONS='--no-node-snapshot' bun run build",
+    "version": "git add -A",
+    "postversion": "git push && git push --tags",
+    "release": "bun run release.ts",
     "dev": "bun run cli.ts",
     "start": "bun run cli.ts"
   },
