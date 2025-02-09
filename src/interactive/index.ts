@@ -6,6 +6,8 @@ import { keygenInteractive } from "./keygen";
 import { keyinfoInteractive } from "./keyinfo";
 import { airdropInteractive } from "./airdrop";
 import { syncAction } from "../commands/sync";
+import { checkDependencies } from "../commands/doctor";
+import { setupAction } from "../commands/setup";
 
 export async function interactiveMode(connection: Connection) {
   while (true) {
@@ -28,10 +30,9 @@ export async function interactiveMode(connection: Connection) {
             name: chalk.magenta("Request SOL Airdrop"),
             value: "Request SOL Airdrop",
           },
-          {
-            name: chalk.cyan("Sync with Solana CLI"),
-            value: "Sync",
-          },
+          { name: chalk.cyan("Sync with Solana CLI"), value: "Sync" },
+          { name: chalk.blue("Setup Development Environment"), value: "Setup" },
+          { name: chalk.yellow("Check Dependencies"), value: "Doctor" },
           { name: chalk.red("Exit"), value: "Exit" },
         ],
       },
@@ -57,6 +58,12 @@ export async function interactiveMode(connection: Connection) {
         break;
       case "Sync":
         await syncAction();
+        break;
+      case "Setup":
+        await setupAction();
+        break;
+      case "Doctor":
+        await checkDependencies();
         break;
     }
 

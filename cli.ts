@@ -12,6 +12,8 @@ import { syncCommand } from "./src/commands/sync";
 import { interactiveMode } from "./src/interactive";
 import { getConnection } from "./src/utils/connection";
 import { version } from "./package.json";
+import { setupCommand } from "./src/commands/setup";
+import { doctorCommand } from "./src/commands/doctor";
 
 // Add initial spacing
 console.log();
@@ -29,6 +31,8 @@ keygenCommand(program);
 keyinfoCommand(program);
 airdropCommand(program, getConnection());
 syncCommand(program);
+setupCommand(program);
+doctorCommand(program);
 
 // Parse or run interactive mode
 const options = program.opts();
