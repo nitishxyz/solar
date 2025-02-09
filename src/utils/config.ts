@@ -8,46 +8,28 @@ import {
   LOCAL_CONFIG_PATH,
 } from "../constants";
 
-export function loadConfig(): SolarConfig {
-  let config = { ...DEFAULT_CONFIG };
-
-  // Load global config if exists
+export function loadConfig(isGlobal: boolean = false): SolarConfig {
   try {
-    if (fs.existsSync(GLOBAL_CONFIG_PATH)) {
-      config = {
-        ...config,
-        ...JSON.parse(fs.readFileSync(GLOBAL_CONFIG_PATH, "utf-8")),
-      };
+    if (isGlobal) {
+      // Load global config if exists
+      if (fs.existsSync(GLOBAL_CONFIG_PATH)) {
+        return JSON.parse(fs.readFileSync(GLOBAL_CONFIG_PATH, "utf-8"));
+      }
+    } else {
+      // Try local config first
+      if (fs.existsSync(LOCAL_CONFIG_PATH)) {
+        return JSON.parse(fs.readFileSync(LOCAL_CONFIG_PATH, "utf-8"));
+      }
+      // Fall back to global config if no local config
+      if (fs.existsSync(GLOBAL_CONFIG_PATH)) {
+        return JSON.parse(fs.readFileSync(GLOBAL_CONFIG_PATH, "utf-8"));
+      }
     }
-  } catch (error) {
-    console.warn(
-      chalk.yellow(
-        `Warning: Could not load global config: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      )
-    );
+    // If no config exists, return default
+    return DEFAULT_CONFIG;
+  } catch {
+    return DEFAULT_CONFIG;
   }
-
-  // Load local config if exists (takes precedence)
-  try {
-    if (fs.existsSync(LOCAL_CONFIG_PATH)) {
-      const localConfig = JSON.parse(
-        fs.readFileSync(LOCAL_CONFIG_PATH, "utf-8")
-      );
-      config = { ...config, ...localConfig };
-    }
-  } catch (error) {
-    console.warn(
-      chalk.yellow(
-        `Warning: Could not load local config: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      )
-    );
-  }
-
-  return config;
 }
 
 export function saveConfig(

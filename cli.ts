@@ -14,7 +14,7 @@ import { getConnection } from "./src/utils/connection";
 import { version } from "./package.json";
 import { setupCommand } from "./src/commands/setup";
 import { doctorCommand } from "./src/commands/doctor";
-
+import { txCommand } from "./src/commands/tx";
 // Add initial spacing
 console.log();
 
@@ -29,10 +29,11 @@ program
 configCommand(program);
 keygenCommand(program);
 keyinfoCommand(program);
-airdropCommand(program, getConnection());
+airdropCommand(program);
 syncCommand(program);
 setupCommand(program);
 doctorCommand(program);
+txCommand(program);
 
 // Parse or run interactive mode
 const options = program.opts();
@@ -49,7 +50,7 @@ if (options.interactive || process.argv.length <= 2) {
   process.on("exit", () => {});
 
   try {
-    await interactiveMode(getConnection());
+    await interactiveMode(getConnection(false));
   } catch (error: any) {
     if (error?.message?.includes("User force closed")) {
       process.exit(0);

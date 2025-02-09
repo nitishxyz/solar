@@ -1,10 +1,6 @@
 import inquirer from "inquirer";
-import ora from "ora";
-import chalk from "chalk";
-import { Keypair } from "@solana/web3.js";
-import fs from "fs";
 import path from "path";
-import { GLOBAL_KEYPAIR_PATH } from "../constants";
+import { generateKeypair } from "../actions/keygen";
 
 export async function keygenInteractive() {
   const { choice } = await inquirer.prompt([
@@ -22,8 +18,6 @@ export async function keygenInteractive() {
 
   if (choice === "back") return;
 
-  let keypairPath = GLOBAL_KEYPAIR_PATH;
-
   if (choice === "local") {
     const { filename } = await inquirer.prompt([
       {
@@ -35,64 +29,12 @@ export async function keygenInteractive() {
           if (!input.endsWith(".json")) return "Filename must end with .json";
           if (input.includes("/") || input.includes("\\"))
             return "Filename cannot contain path separators";
-          const fullPath = path.join(process.cwd(), input);
-          if (fs.existsSync(fullPath)) {
-            return chalk.yellow(
-              "⚠️  File exists, will be overwritten if you continue"
-            );
-          }
           return true;
         },
       },
     ]);
-    keypairPath = path.join(process.cwd(), filename);
-  }
-
-  if (fs.existsSync(keypairPath)) {
-    console.log(
-      chalk.yellow("\n⚠️  WARNING: An existing keypair file was found:")
-    );
-    const existingKey = new Uint8Array(
-      JSON.parse(fs.readFileSync(keypairPath, "utf-8"))
-    );
-    const existingKeypair = Keypair.fromSecretKey(existingKey);
-    console.log(
-      chalk.yellow("Existing Public Key:"),
-      existingKeypair.publicKey.toBase58()
-    );
-  }
-
-  const { confirmed } = await inquirer.prompt([
-    {
-      type: "confirm",
-      name: "confirmed",
-      message: `This will ${
-        fs.existsSync(keypairPath) ? "overwrite" : "create"
-      } ${keypairPath}. Continue?`,
-      default: false,
-    },
-  ]);
-
-  if (!confirmed) {
-    console.log(chalk.yellow("Operation cancelled"));
-    return;
-  }
-
-  const genSpinner = ora("Generating keypair...").start();
-  try {
-    const keypair = Keypair.generate();
-    const keypairData = JSON.stringify(Array.from(keypair.secretKey));
-    fs.mkdirSync(path.dirname(keypairPath), { recursive: true });
-    fs.writeFileSync(keypairPath, keypairData);
-    genSpinner.succeed(chalk.green(`Keypair generated: ${keypairPath}`));
-    console.log(chalk.blue("Public Key:"), keypair.publicKey.toBase58());
-  } catch (error) {
-    genSpinner.fail(
-      chalk.red(
-        `Failed to generate keypair: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      )
-    );
+    await generateKeypair({ customPath: path.join(process.cwd(), filename) });
+  } else {
+    await generateKeypair({ isGlobal: true });
   }
 }

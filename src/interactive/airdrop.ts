@@ -1,10 +1,8 @@
 import inquirer from "inquirer";
-import ora from "ora";
-import chalk from "chalk";
-import { Connection, PublicKey } from "@solana/web3.js";
 import { validators } from "../utils/validators";
+import { requestAirdrop } from "../actions/airdrop";
 
-export async function airdropInteractive(connection: Connection) {
+export async function airdropInteractive() {
   const { choice } = await inquirer.prompt([
     {
       type: "list",
@@ -28,19 +26,5 @@ export async function airdropInteractive(connection: Connection) {
     },
   ]);
 
-  const airdropSpinner = ora("Requesting airdrop...").start();
-  try {
-    const publicKey = new PublicKey(address);
-    const signature = await connection.requestAirdrop(publicKey, 1e9);
-    airdropSpinner.succeed(chalk.green(`Airdropped 1 SOL to ${address}`));
-    console.log(chalk.blue("Transaction Signature:"), signature);
-  } catch (error) {
-    airdropSpinner.fail(
-      chalk.red(
-        `Airdrop failed: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      )
-    );
-  }
+  await requestAirdrop(address);
 }

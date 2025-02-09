@@ -5,9 +5,10 @@ import { configInteractive } from "./config";
 import { keygenInteractive } from "./keygen";
 import { keyinfoInteractive } from "./keyinfo";
 import { airdropInteractive } from "./airdrop";
-import { syncAction } from "../commands/sync";
-import { checkDependencies } from "../commands/doctor";
-import { setupAction } from "../commands/setup";
+import { syncInteractive } from "./sync";
+import { txInteractive } from "./tx";
+import { doctorInteractive } from "./doctor";
+import { setupInteractive } from "./setup";
 
 export async function interactiveMode(connection: Connection) {
   while (true) {
@@ -25,6 +26,10 @@ export async function interactiveMode(connection: Connection) {
           {
             name: chalk.yellow("View Keypair Info"),
             value: "View Keypair Info",
+          },
+          {
+            name: chalk.magenta("View Transaction Details"),
+            value: "View Transaction Details",
           },
           {
             name: chalk.magenta("Request SOL Airdrop"),
@@ -47,6 +52,9 @@ export async function interactiveMode(connection: Connection) {
       case "Configure":
         await configInteractive();
         break;
+      case "View Transaction Details":
+        await txInteractive();
+        break;
       case "Generate New Keypair":
         await keygenInteractive();
         break;
@@ -54,16 +62,16 @@ export async function interactiveMode(connection: Connection) {
         await keyinfoInteractive();
         break;
       case "Request SOL Airdrop":
-        await airdropInteractive(connection);
+        await airdropInteractive();
         break;
       case "Sync":
-        await syncAction();
+        await syncInteractive();
         break;
       case "Setup":
-        await setupAction();
+        await setupInteractive();
         break;
       case "Doctor":
-        await checkDependencies();
+        await doctorInteractive();
         break;
     }
 

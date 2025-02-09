@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2025-02-09
+
+### Added
+
+- Connection utility for managing Solana RPC endpoints
+  - Added `getConnection` function with global/local configuration support
+  - Implements connection caching to improve performance
+  - Automatic RPC endpoint synchronization based on config changes
+  - Restructured commands and actions to improve readability and maintainability
+  - tx command now displays a summary of the transaction
+
 ## [0.1.7] - 2025-02-09
 
 ### Added
