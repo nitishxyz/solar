@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.9] - 2025-02-09
+## [0.1.10] - 2025-02-09
 
 ### Added
 
@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - UI/UX Improvements
   - Increased page size to 15 items in interactive menus
   - Enhanced menu readability in configuration and main menu
+- Airdrop command now supports using the current configured wallet
 
 ## [0.1.8] - 2025-02-09
 
