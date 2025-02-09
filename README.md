@@ -2,7 +2,7 @@
 
 A powerful command-line interface tool for Solana developers that simplifies common development tasks.
 
-![Solar CLI Demo](https://369y9gxi2s.ufs.sh/f/iELAm9NYeRd6FIC1fS3VWoaU4plicm3wq5JZv6d8uPxFShCH)
+<img src="https://369y9gxi2s.ufs.sh/f/iELAm9NYeRd6FIC1fS3VWoaU4plicm3wq5JZv6d8uPxFShCH" alt="Solar CLI Demo" width="800"/>
 
 ## Features
 
