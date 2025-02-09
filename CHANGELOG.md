@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.11] - 2025-02-09
+
+### Added
+
+- New upgrade command functionality
+  - Added `upgrade` command to update Solar CLI to the latest version
+  - Automatic package manager detection (npm, yarn, pnpm)
+  - Fallback to npm if no package manager is detected
+
 ## [0.1.10] - 2025-02-09
 
 ### Added
