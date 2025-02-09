@@ -6,7 +6,11 @@ A powerful command-line interface tool for Solana developers that simplifies com
 
 ## Features
 
+- 🛠️ Automated development environment setup
+- 🔍 Development environment verification
+- 🔄 Easy CLI updates with automatic package manager detection
 - 🔑 Generate and manage Solana keypairs
+- 👛 View wallet information
 - 💫 Request SOL airdrops for development
 - ⚙️ Flexible configuration management (global & local)
 - 🔄 Sync settings with Solana CLI
@@ -85,6 +89,19 @@ solar <command> [options]
 
 ### Available Commands
 
+#### Setup & Maintenance
+
+```bash
+solar setup
+  Set up development environment (installs Rust, Solana CLI, and Anchor)
+
+solar doctor
+  Verify development environment dependencies
+
+solar upgrade
+  Update Solar CLI to the latest version
+```
+
 #### Configuration
 
 ```bash
@@ -96,9 +113,12 @@ solar config [options] [network]
   -k, --keypair   <path> Set keypair path
 ```
 
-#### Keypair Management
+#### Wallet & Keypair Management
 
 ```bash
+solar wallet
+  View current wallet information
+
 solar keygen [options]
   -g, --global    Save to global keypair location
 
@@ -109,8 +129,9 @@ solar keyinfo <file>
 #### Airdrop
 
 ```bash
-solar airdrop <address>
+solar airdrop [address]
   Request 1 SOL airdrop for development
+  If no address is provided, uses the current configured wallet
 ```
 
 #### Sync with Solana CLI
