@@ -60,11 +60,13 @@ function release() {
     execSync(`git tag -a v${newVersion} -m "Release v${newVersion}"`);
     execSync("git push origin main --tags");
 
-    // Publish to npm
-    execSync("npm publish");
-
-    console.log(chalk.green(`✅ Successfully released version ${newVersion}!`));
+    console.log(chalk.green(`✅ Successfully created release v${newVersion}!`));
     console.log(chalk.gray("📝 Don't forget to update CHANGELOG.md"));
+    console.log(
+      chalk.blue(
+        "🚀 GitHub Action will handle the npm publishing automatically"
+      )
+    );
   } catch (error) {
     console.error(chalk.red("❌ Release failed:"), error);
     process.exit(1);
