@@ -38,7 +38,7 @@ txCommand(program);
 // Parse or run interactive mode
 const options = program.opts();
 if (options.interactive || process.argv.length <= 2) {
-  console.log("🌟 Welcome to Solar CLI Interactive Mode!\n");
+  console.log("🌟 Welcome to Solar CLI Interactive Mode!");
 
   // Handle CTRL+C gracefully
   process.on("SIGINT", () => {

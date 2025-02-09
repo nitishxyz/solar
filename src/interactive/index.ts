@@ -12,11 +12,12 @@ import { setupInteractive } from "./setup";
 
 export async function interactiveMode(connection: Connection) {
   while (true) {
+    console.log();
     const { action } = await inquirer.prompt([
       {
         type: "list",
         name: "action",
-        message: "What would you like to do?",
+        message: "What would you like to do?\n",
         choices: [
           { name: chalk.blue("Configure Settings"), value: "Configure" },
           {
@@ -35,7 +36,7 @@ export async function interactiveMode(connection: Connection) {
             name: chalk.magenta("Request SOL Airdrop"),
             value: "Request SOL Airdrop",
           },
-          { name: chalk.cyan("Sync with Solana CLI"), value: "Sync" },
+          { name: chalk.cyan("Sync Solana CLI"), value: "Sync" },
           { name: chalk.blue("Setup Development Environment"), value: "Setup" },
           { name: chalk.yellow("Check Dependencies"), value: "Doctor" },
           { name: chalk.red("Exit"), value: "Exit" },
@@ -44,9 +45,11 @@ export async function interactiveMode(connection: Connection) {
     ]);
 
     if (action === "Exit") {
-      console.log(chalk.yellow("👋 Goodbye!"));
+      console.log(chalk.yellow("\n👋 Goodbye!"));
       process.exit(0);
     }
+
+    console.log();
 
     switch (action) {
       case "Configure":
@@ -75,6 +78,7 @@ export async function interactiveMode(connection: Connection) {
         break;
     }
 
+    console.log();
     await inquirer.prompt([
       {
         type: "input",
