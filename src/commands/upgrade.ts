@@ -7,41 +7,46 @@ export function upgradeCommand(program: Command) {
     .description("Upgrade Solar CLI to the latest version")
     .action(async () => {
       try {
-        // Check if npm was used (package-lock.json exists)
+        // Check which package manager was used for the global installation
         try {
-          execSync("test -f package-lock.json", { stdio: "ignore" });
+          const which = execSync("which solar").toString();
+
+          if (which.includes("/.bun/")) {
+            console.log("📦 Upgrading using bun...");
+            execSync("bun add -g @nitishxyz/solar@latest", {
+              stdio: "inherit",
+            });
+            return;
+          }
+
+          if (which.includes("/.pnpm/")) {
+            console.log("📦 Upgrading using pnpm...");
+            execSync("pnpm add -g @nitishxyz/solar@latest", {
+              stdio: "inherit",
+            });
+            return;
+          }
+
+          if (which.includes("/.yarn/")) {
+            console.log("📦 Upgrading using yarn...");
+            execSync("yarn global add @nitishxyz/solar@latest", {
+              stdio: "inherit",
+            });
+            return;
+          }
+
+          // Default to npm
           console.log("📦 Upgrading using npm...");
-          execSync("npm install -g @nitishxyz/solar-cli@latest", {
+          execSync("npm install -g @nitishxyz/solar@latest", {
             stdio: "inherit",
           });
-          return;
-        } catch {}
-
-        // Check if yarn was used (yarn.lock exists)
-        try {
-          execSync("test -f yarn.lock", { stdio: "ignore" });
-          console.log("📦 Upgrading using yarn...");
-          execSync("yarn global add @nitishxyz/solar-cli@latest", {
+        } catch (error) {
+          // If which command fails, default to npm
+          console.log("📦 Upgrading using npm...");
+          execSync("npm install -g @nitishxyz/solar@latest", {
             stdio: "inherit",
           });
-          return;
-        } catch {}
-
-        // Check if pnpm was used (pnpm-lock.yaml exists)
-        try {
-          execSync("test -f pnpm-lock.yaml", { stdio: "ignore" });
-          console.log("📦 Upgrading using pnpm...");
-          execSync("pnpm add -g @nitishxyz/solar-cli@latest", {
-            stdio: "inherit",
-          });
-          return;
-        } catch {}
-
-        // Default to npm if no lock file is found
-        console.log("📦 Upgrading using npm...");
-        execSync("npm install -g @nitishxyz/solar-cli@latest", {
-          stdio: "inherit",
-        });
+        }
       } catch (error: any) {
         console.error("❌ Failed to upgrade Solar CLI:", error.message);
         process.exit(1);
