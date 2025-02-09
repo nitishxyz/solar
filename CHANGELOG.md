@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.13] - 2025-02-09
+
+### Fixed
+
+- Upgrade command now works with all package managers
+  - Automatic package manager detection (npm, yarn, pnpm, bun)
+- Fixed package name in upgrade command
+
 ## [0.1.12] - 2025-02-09
 
 ### Added
